@@ -4,6 +4,10 @@ Are you tired of the hassle that comes with installing or updating the latest ve
 `Go-installer-script-for-latest-version`
 is a lightweight and user-friendly Python script designed to simplify the installation and updating process for GO.
 
+## Requirements
+- Python 3.6 or higher
+- Curl
+
 ## Installation
 Run the following command in your terminal to install the script:
 ```bash

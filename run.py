@@ -6,6 +6,7 @@ import sys
 import tempfile
 import shutil
 import urllib.request
+import tarfile
 
 VERSION = "1.21.1"
 # GOROOT = os.path.expanduser("~/.go")
@@ -83,7 +84,19 @@ urllib.request.urlretrieve(url, os.path.join(TEMP_DIRECTORY, "go.tar.gz"))
 
 print("Extracting File...")
 os.makedirs(GOROOT, mode=0o777, exist_ok=True)
-subprocess.run(["tar", "-C", GOROOT, "--strip-components=1", "-xf", os.path.join(TEMP_DIRECTORY, "go.tar.gz")])
+# subprocess.run(["tar", "-C", GOROOT, "--strip-components=1", "-xf", os.path.join(TEMP_DIRECTORY, "go.tar.gz")])
+
+try:
+    # Extract the tar file to the specified directory and strip the components
+    with tarfile.open(os.path.join(TEMP_DIRECTORY, "go.tar.gz"), 'r:gz') as tar:
+        for member in tar.getmembers():
+            member.path = os.path.join(GOROOT, os.path.relpath(member.path, 'go'))
+            tar.extract(member)
+
+    print(f'Tar file extracted successfully to {GOROOT}')
+
+except tarfile.TarError as e:
+    print(f'Error extracting tar file: {e}')
 
 print(f"Go {VERSION} was installed into {GOROOT}.\n"
     f"Make sure to relogin into your shell or run:\n\n"

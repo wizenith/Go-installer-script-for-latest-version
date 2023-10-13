@@ -9,6 +9,11 @@ is a lightweight and user-friendly Python script designed to simplify the instal
 - Curl
 
 ## Installation
+Clone the repository to your local machine:
+```bash
+git clone https://github.com/wizenith/Go-installer-script-for-latest-version
+```
+---
 Run the following command in your terminal to install the script:
 ```bash
 python3 run.py

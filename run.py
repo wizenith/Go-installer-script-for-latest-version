@@ -17,13 +17,12 @@ GOPATH = os.environ.get("GOPATH", os.path.expanduser("~/go"))
 print(f"GOROOT: {GOROOT}")
 print(f"GOPATH: {GOPATH}")
 
-#  execute curl and get the output
-VERSION = subprocess.check_output("curl -s https://go.dev/VERSION?m=text | head -1", shell=True).decode("utf-8").strip()
-print(f"Go VERSION: {VERSION}")
+# using urllib.request to get the output
+VERSION = urllib.request.urlopen("https://go.dev/VERSION?m=text").read().decode("utf-8").splitlines()[0].strip()
 
+print(f"Go VERSION: {VERSION}")
 # print(f"GOROOT: {GOROOT}")
 # print(f"GOPATH: {GOPATH}")
-# sys.exit(0)
 
 OS = platform.system()
 ARCH = platform.architecture()[0]
@@ -56,12 +55,14 @@ if len(sys.argv) > 1:
     elif sys.argv[1] == "--help":
         print_help()
         sys.exit(0)
-    elif sys.argv[1] == "--version":
+    elif sys.argv[1] == "--version" or sys.argv[1] == "-v":
         if len(sys.argv) < 3:
-            print("Please provide a version number for: --version")
+            print("Please provide a version number for: --version or -v")
             sys.exit(1)
         else:
-            VERSION = sys.argv[2]
+            VERSION = f"go{sys.argv[2]}"
+            # print(f"VERSION: {VERSION}")
+            # sys.exit(0)
     else:
         print(f"Unrecognized option: {sys.argv[1]}")
         sys.exit(1)

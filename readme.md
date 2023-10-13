@@ -20,3 +20,20 @@ python3 run.py
 ```
 
 That's it, you're done and you have the latest version of GO installed on your system.
+
+### Install a specific version of GO
+If you want to install a specific version of GO, you can do so by running the following command:
+```bash
+python3 run.py --version <version number>
+python3 run.py -v <version number>
+
+```
+
+**Note:**
+**<version>** should only be the version number, for example:
+```bash
+python3 run.py --version 1.21.1
+```
+```bash
+python3 run.py -v 1.21.1
+```
